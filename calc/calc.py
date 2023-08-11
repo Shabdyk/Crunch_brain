@@ -33,10 +33,10 @@ while True:
             elif event == '.' and '.' in line[-1]: pass
             
             else: line.extend([event, ''])
-            
+
     values['line'] = ''.join(line)
     window['line'].update(values['line'])
-
+# lll
     print(values)
     print(line)
 
