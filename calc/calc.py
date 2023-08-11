@@ -36,7 +36,7 @@ while True:
 
     values['line'] = ''.join(line)
     window['line'].update(values['line'])
-# lll
+
     print(values)
     print(line)
 
