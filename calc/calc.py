@@ -32,7 +32,13 @@ while True:
                 else: line[-1] += event
             elif event == '.' and '.' in line[-1]: pass
             
-            else: line.extend([event, ''])
+            else: 
+                if line[-1] == '':
+                    try:
+                        line.pop(-2)
+                        line.pop(-1)
+                    except IndexError: pass
+                line.extend([event, ''])
 
     values['line'] = ''.join(line)
     window['line'].update(values['line'])
