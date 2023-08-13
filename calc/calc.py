@@ -12,25 +12,25 @@ layout = [
             [sg.Button('-'), sg.Button('C'), sg.Button('=')] ]
 
 # Create the Window
-window = sg.Window('Window Title', layout)
-line = ['']
+window = sg.Window('Calculator', layout)
+line = [''] #init calc line
 
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
-    event, values = window.read()
-    if event == sg.WIN_CLOSED: break
+    event, values = window.read() 
+    if event == sg.WIN_CLOSED: break #close when close
 
-    if event == 'C': line = ['0']
+    if event == 'C': line = ['0'] #clear button
     else:
         try:
-            int(event)
-            if event == '0' and line[-1] == '': line[-1] = '0.'
-            else: line[-1] += event
-        except ValueError:
-            if event == '.' and '.' not in line[-1]: 
-                if line[-1] == '': line[-1] = '0.'
-                else: line[-1] += event
-            elif event == '.' and '.' in line[-1]: pass
+            int(event)                                          #try to make the clicked button be integer
+            if event == '0' and line[-1] == '': line[-1] = '0.' #clicking '0' in the beggining makes '0.'
+            else: line[-1] += event                             #place the digit to the line
+        except ValueError:                                      #button is not a digit
+            if event == '.' and '.' not in line[-1]:            #don't add '.' 
+                if line[-1] == '': line[-1] = '0.'  
+                else: line[-1] += event                         #if it doesn't exist, place it
+            elif event == '.' and '.' in line[-1]: pass         #if it exists, pass
             
             else: 
                 if line[-1] == '':
