@@ -19,7 +19,7 @@ def mult_div(li:list):
         if '/' in li:
             j = li.index('/')
 
-        print(str(i) + 'i__j' + str(j))
+        # print(str(i) + 'i__j' + str(j))
 
         if (i < j and i != 0) or j == 0:
             product = li[i-1] * li[i+1]
@@ -30,13 +30,12 @@ def mult_div(li:list):
             li[j-1:j+2] = [ratio]
             # print('ratio')
         else:
-            print('Error i = j')
-            break
+            raise Exception('i = j. Call tech support')
 
-        print(li)
+        # print(li)
 
     if ('/' or '*') in li:
-        print('PANIC')
+        raise Exception('Multiplication and division went terribly wrong')
 
     return li
 

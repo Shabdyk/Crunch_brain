@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+import src
 
 sg.theme('DarkAmber')   # Add a touch of color
 # All the stuff inside your window.
@@ -10,7 +11,7 @@ layout = [
             [sg.Button('7'), sg.Button('8'), sg.Button('9')],
             [sg.Button('+'), sg.Button('0'), sg.Button('.')],
             [sg.Button('-'), sg.Button('='), sg.Button('C')],
-            [sg.Button('*'), sg.Button('\\'), sg.Button('CE')] ]
+            [sg.Button('*'), sg.Button('/'), sg.Button('CE')] ]
 
 # Create the Window
 window = sg.Window('Calculator', layout)
@@ -25,40 +26,12 @@ while True:
 
     elif event == '=':
 
-        # multiplication
+        stage_1 = src.plus_minus(line)
 
-        for i in range(0, len(line)):
-            # i = line.index(i)
-            if line[i] == '*':
-                eq = float(line[i-1]) * float(line[i+1])
-                line[i-1] = str(eq)
-                line[i+1] = '0'
-                line.pop(i)
-        
-        # addition and substraction
-        end = 0
-        while len(line) != 1:
-            end += 1
-            # print('AAA')
-            if line[1] == '+': #addition
-                eq = float(line[0]) + float(line[2])
-                line[1] = str(eq)
-                line.pop(2)
-                line.pop(0)
-            elif line[1] == '-': #substraction
-                eq = float(line[0]) - float(line[2])
-                line[1] = str(eq)
-                line.pop(2)
-                line.pop(0)
-            elif end == 20:
-                print("END")
-                break
-            # try:
-            #     line.remove('0') 
-            #     print('0 clear: ')
-            #     print(line)
-            # except ValueError:
-            #     break
+        stage_2 = src.mult_div(stage_1)
+
+        eq = sum(stage_2)
+        line = [str(eq)]
                 
 
     else:
