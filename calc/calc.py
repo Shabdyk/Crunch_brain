@@ -6,7 +6,7 @@ sg.theme('DarkAmber')   # Add a touch of color
 layout = [  
             [sg.Text('', key = 'line')],
             # [sg.InputText(key = 'line', default_text= '0')],
-            [sg.Button('1'), sg.Button('2'), sg.Button('3')],
+            [sg.Button('1', k = '1'), sg.Button('2'), sg.Button('3')],
             [sg.Button('4'), sg.Button('5'), sg.Button('6')],
             [sg.Button('7'), sg.Button('8'), sg.Button('9')],
             [sg.Button('+'), sg.Button('0'), sg.Button('.')],
@@ -14,7 +14,9 @@ layout = [
             [sg.Button('*'), sg.Button('/'), sg.Button('CE')] ]
 
 # Create the Window
-window = sg.Window('Calculator', layout)
+window = sg.Window('Calculator', layout, finalize=True)
+# window['1'].bind("<Return>", "Enter")
+# window['1'].bind('<1>', '')
 line = [''] #init calc line
 
 # Event Loop to process "events" and get the "values" of the inputs
@@ -24,10 +26,15 @@ while True:
 
     if event == 'C': line = [''] #clear button
 
+    elif event == 'CE':
+        if line[-1] == '' and len(line) != 1: line.pop()
+        line[-1] = ''
+
+
     elif event == '=':
+        # list not in line
 
         stage_1 = src.plus_minus(line)
-
         stage_2 = src.mult_div(stage_1)
 
         eq = sum(stage_2)
